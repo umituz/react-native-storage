@@ -12,13 +12,13 @@
     "baseUrl": "./",
 
     /* Emit */
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "noEmit": true,
     "outDir": "./lib",
     "rootDir": "./src",
     "removeComments": false,
-    "noEmit": false,
 
     /* Interop Constraints */
     "esModuleInterop": true,
@@ -52,7 +52,6 @@
   ],
   "exclude": [
     "node_modules",
-    "lib",
     "**/*.test.ts",
     "**/*.test.tsx",
     "**/*.spec.ts",
