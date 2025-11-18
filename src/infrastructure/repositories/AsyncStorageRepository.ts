@@ -143,6 +143,22 @@ export class AsyncStorageRepository implements IStorageRepository {
       return failure(new StorageReadError('MULTIPLE_KEYS', error));
     }
   }
+
+  /**
+   * Get object from storage (alias for getItem for backward compatibility)
+   * @deprecated Use getItem instead
+   */
+  async getObject<T>(key: string, defaultValue: T): Promise<StorageResult<T>> {
+    return this.getItem(key, defaultValue);
+  }
+
+  /**
+   * Set object in storage (alias for setItem for backward compatibility)
+   * @deprecated Use setItem instead
+   */
+  async setObject<T>(key: string, value: T): Promise<StorageResult<T>> {
+    return this.setItem(key, value);
+  }
 }
 
 /**

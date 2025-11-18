@@ -53,4 +53,16 @@ export interface IStorageRepository {
    * Get multiple items at once
    */
   getMultiple(keys: string[]): Promise<StorageResult<Record<string, string | null>>>;
+
+  /**
+   * Get object from storage (alias for getItem for backward compatibility)
+   * @deprecated Use getItem instead
+   */
+  getObject<T>(key: string, defaultValue: T): Promise<StorageResult<T>>;
+
+  /**
+   * Set object in storage (alias for setItem for backward compatibility)
+   * @deprecated Use setItem instead
+   */
+  setObject<T>(key: string, value: T): Promise<StorageResult<T>>;
 }

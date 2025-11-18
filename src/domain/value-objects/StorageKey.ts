@@ -15,6 +15,9 @@ export enum StorageKey {
   // Onboarding
   ONBOARDING_COMPLETED = '@onboarding_completed',
 
+  // Auth
+  AUTH_SHOW_REGISTER = '@auth_show_register',
+
   // Localization
   LANGUAGE = '@app_language',
 
