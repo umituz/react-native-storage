@@ -1,7 +1,7 @@
 {
   "name": "@umituz/react-native-storage",
-  "version": "2.4.5",
-  "description": "Zustand state management with AsyncStorage persistence and type-safe storage operations for React Native",
+  "version": "2.6.1",
+  "description": "Unified storage solution with AsyncStorage persistence, Zustand state management, and in-memory caching for React Native",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "scripts": {
@@ -17,7 +17,11 @@
     "async-storage",
     "zustand",
     "persistence",
-    "secure-storage"
+    "secure-storage",
+    "cache",
+    "in-memory",
+    "ttl",
+    "lru"
   ],
   "author": "Ümit UZ <umit@umituz.com>",
   "license": "MIT",

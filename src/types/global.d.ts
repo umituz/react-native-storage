@@ -20,6 +20,8 @@ declare module 'react' {
   export function useEffect(effect: () => void | (() => void), deps?: readonly any[]): void;
   export function useCallback<T extends (...args: any[]) => any>(callback: T, deps: readonly any[]): T;
   export function useMemo<T>(factory: () => T, deps: readonly any[]): T;
+  export function useRef<T>(initialValue?: T): { current: T | undefined };
+  export function useRef<T>(initialValue: T): { current: T };
 }
 
 declare module 'react-native' {

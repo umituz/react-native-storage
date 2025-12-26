@@ -88,7 +88,13 @@ export { isDev, devWarn, devError, devLog } from './domain/utils/devUtils';
 // DOMAIN LAYER - Store Types
 // =============================================================================
 
-export type { StoreConfig, PersistedState } from './domain/types/Store';
+export type {
+  StoreConfig,
+  PersistedState,
+  SetState,
+  GetState,
+  ActionsCreator,
+} from './domain/types/Store';
 
 // =============================================================================
 // DOMAIN LAYER - Store Factory
@@ -132,3 +138,31 @@ export {
 
 export { useCacheState } from './presentation/hooks/useCacheState';
 export { CacheStorageOperations } from './presentation/hooks/CacheStorageOperations';
+
+// =============================================================================
+// IN-MEMORY CACHE LAYER (Merged from @umituz/react-native-cache)
+// =============================================================================
+
+export { Cache } from './cache/domain/Cache';
+export { CacheManager, cacheManager } from './cache/domain/CacheManager';
+export { CacheStatsTracker } from './cache/domain/CacheStatsTracker';
+export { PatternMatcher } from './cache/domain/PatternMatcher';
+export { ErrorHandler, CacheError } from './cache/domain/ErrorHandler';
+export { TTLCache } from './cache/infrastructure/TTLCache';
+
+export type {
+  CacheEntry,
+  CacheConfig,
+  CacheStats,
+  EvictionStrategy,
+} from './cache/domain/types/Cache';
+
+export type { EvictionStrategy as IEvictionStrategy } from './cache/domain/strategies/EvictionStrategy';
+
+export { LRUStrategy } from './cache/domain/strategies/LRUStrategy';
+export { LFUStrategy } from './cache/domain/strategies/LFUStrategy';
+export { FIFOStrategy } from './cache/domain/strategies/FIFOStrategy';
+export { TTLStrategy as TTLEvictionStrategy } from './cache/domain/strategies/TTLStrategy';
+
+export { useCache } from './cache/presentation/useCache';
+export { useCachedValue } from './cache/presentation/useCachedValue';
