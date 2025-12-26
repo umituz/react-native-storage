@@ -19,7 +19,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "declaration": true,
-    "rootDir": "./src",
     "types": [
       "jest",
       "./src/types/global"
