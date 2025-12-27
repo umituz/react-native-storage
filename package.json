@@ -1,6 +1,6 @@
 {
   "name": "@umituz/react-native-storage",
-  "version": "2.6.3",
+  "version": "2.6.4",
   "description": "Unified storage solution with AsyncStorage persistence, Zustand state management, and in-memory caching for React Native",
   "main": "./src/index.ts",
   "types": "./src/index.ts",

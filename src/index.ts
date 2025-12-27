@@ -103,6 +103,13 @@ export type {
 export { createStore } from './domain/factories/StoreFactory';
 
 // =============================================================================
+// ZUSTAND - Type Re-exports for Compatibility
+// =============================================================================
+
+export type { StoreApi, UseBoundStore } from 'zustand';
+export type { StateCreator, StoreMutatorIdentifier } from 'zustand/vanilla';
+
+// =============================================================================
 // APPLICATION LAYER - Ports
 // =============================================================================
 
