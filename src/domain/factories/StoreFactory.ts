@@ -1,19 +1,6 @@
 /**
  * Store Factory
  * Create Zustand stores with AsyncStorage persistence and actions
- *
- * @example
- * ```typescript
- * const useCounterStore = createStore({
- *   name: 'counter',
- *   initialState: { count: 0 },
- *   actions: (set, get) => ({
- *     increment: () => set({ count: get().count + 1 }),
- *     reset: () => set({ count: 0 }),
- *   }),
- *   persist: true,
- * });
- * ```
  */
 
 import { create } from 'zustand';
@@ -30,13 +17,13 @@ export function createStore<
 >(config: StoreConfig<TState, TActions>) {
   type Store = TState & TActions;
 
-  const stateCreator = (
-    set: (partial: Partial<Store>) => void,
-    get: () => Store
-  ): Store => {
-    const state = config.initialState as Store;
-    const actions = config.actions ? config.actions(set as any, get as any) : ({} as TActions);
-    return { ...state, ...actions };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const stateCreator = (set: any, get: any): Store => {
+    const state = config.initialState as TState;
+    const actions = config.actions
+      ? config.actions(set, get)
+      : ({} as TActions);
+    return { ...state, ...actions } as Store;
   };
 
   if (!config.persist) {
@@ -49,22 +36,25 @@ export function createStore<
       storage: createJSONStorage(() => storageService),
       version: config.version || 1,
       partialize: config.partialize
-        ? (state) => config.partialize!(state) as Store
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ? (state) => config.partialize!(state as any) as any
         : (state) => {
-            // By default, exclude functions (actions) from persistence
             const persisted: Record<string, unknown> = {};
             for (const key of Object.keys(state)) {
               if (typeof state[key as keyof Store] !== 'function') {
                 persisted[key] = state[key as keyof Store];
               }
             }
-            return persisted as Store;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            return persisted as any;
           },
       onRehydrateStorage: () => (state) => {
         if (state && config.onRehydrate) {
-          config.onRehydrate(state);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          config.onRehydrate(state as any);
         }
       },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       migrate: config.migrate as any,
     })
   );
