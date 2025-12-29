@@ -5,6 +5,7 @@
 
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import type { StoreApi } from 'zustand';
 import type { StoreConfig } from '../types/Store';
 import { storageService } from '../../infrastructure/adapters/StorageService';
 
@@ -16,9 +17,10 @@ export function createStore<
   TActions extends object = object
 >(config: StoreConfig<TState, TActions>) {
   type Store = TState & TActions;
+  type SetState = StoreApi<Store>['setState'];
+  type GetState = StoreApi<Store>['getState'];
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const stateCreator = (set: any, get: any): Store => {
+  const stateCreator = (set: SetState, get: GetState): Store => {
     const state = config.initialState as TState;
     const actions = config.actions
       ? config.actions(set, get)
@@ -37,8 +39,8 @@ export function createStore<
       version: config.version || 1,
       partialize: config.partialize
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ? (state) => config.partialize!(state as any) as any
-        : (state) => {
+        ? (state: Store) => config.partialize!(state as any) as any
+        : (state: Store) => {
             const persisted: Record<string, unknown> = {};
             for (const key of Object.keys(state)) {
               if (typeof state[key as keyof Store] !== 'function') {
@@ -48,7 +50,7 @@ export function createStore<
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             return persisted as any;
           },
-      onRehydrateStorage: () => (state) => {
+      onRehydrateStorage: () => (state: Store | undefined) => {
         if (state && config.onRehydrate) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           config.onRehydrate(state as any);
