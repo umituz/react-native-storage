@@ -58,6 +58,6 @@ export function createStore<
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       migrate: config.migrate as any,
-    })
+    }) as any
   );
 }

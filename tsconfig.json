@@ -20,8 +20,7 @@
     "jsx": "react-native",
     "declaration": true,
     "types": [
-      "jest",
-      "./src/types/global"
+      "jest"
     ],
     "paths": {
       "@react-native-async-storage/async-storage": [
